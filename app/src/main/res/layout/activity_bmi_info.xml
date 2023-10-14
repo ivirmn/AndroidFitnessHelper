@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+    <!-- Верхняя часть экрана с информацией о росте, весе и ИМТ -->
+    <TextView
+            android:id="@+id/textViewBmiInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Рост: - см\nВес: - кг\nИМТ: -"
+            android:textSize="24sp"
+            android:layout_marginBottom="32dp" />
+
+    <!-- Список с информацией о ИМТ и степенях недовеса/ожирения -->
+
+    <!-- Надпись о диапазоне ИМТ -->
+    <ListView
+            android:id="@+id/listViewBmiCategories"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"/>
+    <TextView
+            android:id="@+id/textViewBmiRange"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ваш ИМТ попадает в диапазон:"
+            android:textSize="18sp"
+            android:layout_marginBottom="16dp" />
+
+    <!-- Кнопка "Назад" -->
+    <Button
+            android:id="@+id/buttonBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Назад" />
+
+</LinearLayout>

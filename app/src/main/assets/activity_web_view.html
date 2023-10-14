@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Занятия по фитнесу</title>
+    <style>
+        .day-button {
+            width: 12.5%;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+.alter-button {
+            width: 40%;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .all-button {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .edit-button {
+            background-color: #008CBA;
+        }
+
+        .delete-button {
+            background-color: #f44336;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Занятия по фитнесу</h1>
+
+    <button class="all-button" onclick="filterActivities('Все')">Все</button>
+    <button class="day-button" onclick="filterActivities('Пн')">Пн</button>
+    <button class="day-button" onclick="filterActivities('Вт')">Вт</button>
+    <button class="day-button" onclick="filterActivities('Ср')">Ср</button>
+    <button class="day-button" onclick="filterActivities('Чт')">Чт</button>
+    <button class="day-button" onclick="filterActivities('Пт')">Пт</button>
+    <button class="day-button" onclick="filterActivities('Сб')">Сб</button>
+    <button class="day-button" onclick="filterActivities('Вс')">Вс</button>
+    <form action="create_activity.html">
+        <button class="alter-button" src="create_activity.html">Создать занятие</button>
+    </form>
+ <form action="edit-layout.html">
+        <button class="alter-button" src="create_activity.html">Редактировать
+</button>
+    </form>
+
+    <!-- Здесь будут отображаться активности из LocalStorage -->
+    <div id="activitiesList">
+    </div>
+
+    <!-- Загружаем активности при загрузке страницы -->
+    <script>
+        window.onload = function () {
+            loadActivities();
+        };
+
+        function loadActivities() {
+            var storedActivities = localStorage.getItem("activities");
+
+            if (storedActivities !== null) {
+                var activitiesList = JSON.parse(storedActivities);
+                var activitiesHtml = "";
+
+                if (activitiesList && activitiesList.length > 0) {
+                    activitiesHtml = "<ul>";
+                    for (var i = 0; i < activitiesList.length; i++) {
+                        activitiesHtml += "<li>" + activitiesList[i].name + " (Длительность: " + activitiesList[i].duration + ", День: " + activitiesList[i].dayOfWeek + ")";
+                      
+                        activitiesHtml += ' <button class="delete-button" onclick="deleteActivity(' + i + ')">Удалить</button>';
+                        activitiesHtml += "</li>";
+                    }
+                    activitiesHtml += "</ul>";
+                } else {
+                    activitiesHtml = "Занятия не найдены.";
+                }
+
+                document.getElementById("activitiesList").innerHTML = activitiesHtml;
+            } else {
+                document.getElementById("activitiesList").innerHTML = "Занятия не найдены.";
+            }
+        }
+
+        function filterActivities(dayOfWeek) {
+            var activitiesList = JSON.parse(localStorage.getItem("activities"));
+            var filteredActivities = [];
+
+            for (var i = 0; i < activitiesList.length; i++) {
+                if (dayOfWeek === 'Все' || activitiesList[i].dayOfWeek === dayOfWeek) {
+                    filteredActivities.push(activitiesList[i]);
+                }
+            }
+
+            var activitiesHtml = "<ul>";
+            for (var j = 0; j < filteredActivities.length; j++) {
+                activitiesHtml += "<li>" + filteredActivities[j].name + " (Длительность: " + filteredActivities[j].duration + ", День: " + filteredActivities[j].dayOfWeek + ")";
+                activitiesHtml += ' <button class="edit-button" onclick="editActivity(' + j + ')">Редактировать</button>';
+                activitiesHtml += ' <button class="delete-button" onclick="deleteActivity(' + j + ')">Удалить</button>';
+                activitiesHtml += "</li>";
+            }
+            activitiesHtml += "</ul";
+
+            document.getElementById("activitiesList").innerHTML = activitiesHtml;
+        }
+
+        function deleteActivity(index) {
+            var activitiesList = JSON.parse(localStorage.getItem("activities"));
+            activitiesList.splice(index, 1);
+            localStorage.setItem("activities", JSON.stringify(activitiesList));
+            loadActivities(); 
+        }
+
+        function editActivity(index) {
+            var activitiesList = JSON.parse(localStorage.getItem("activities"));
+            var activityToEdit = activitiesList[index];
+            var activityName = prompt("Введите новое название занятия:", activityToEdit.name);
+            var duration = prompt("Введите новую длительность:", activityToEdit.duration);
+            var dayOfWeek = prompt("Введите новый день недели: пн/вт/ср/чт/пт/сб/вс/Каждый день", activityToEdit.dayOfWeek);
+
+            if (activityName && duration && dayOfWeek) {
+                activityToEdit.name = activityName;
+                activityToEdit.duration = duration;
+                activityToEdit.dayOfWeek = dayOfWeek;
+                activitiesList[index] = activityToEdit;
+                localStorage.setItem("activities", JSON.stringify(activitiesList));
+                loadActivities(); 
+            }
+        }
+    </script>
+</body>
+
+</html>
+

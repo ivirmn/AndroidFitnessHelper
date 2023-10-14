@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Занятия по фитнесу</title>
+    <style>
+        .day-button {
+            width: 12.5%;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+.alter-button {
+            width: 40%;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        .all-button {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Занятия по фитнесу</h1>
+
+  
+    <form action="create_activity.html">
+        <button class="alter-button" src="create_activity.html">Создать занятие</button>
+    </form>
+
+
+    <div id="activitiesList">
+    </div>
+
+    
+    <script>
+        window.onload = function () {
+            loadActivities();
+        };
+
+        function loadActivities() {
+            // Получаем данные из LocalStorage
+            var storedActivities = localStorage.getItem("activities");
+
+            if (storedActivities !== null) {
+                var activitiesList = JSON.parse(storedActivities);
+                var activitiesHtml = "<ul>";
+
+                for (var i = 0; i < activitiesList.length; i++) {
+                    var activity = activitiesList[i];
+                    activitiesHtml += "<li>" + activity.name + " (Длительность: " + activity.duration + ", День: " + activity.dayOfWeek + ")";
+                    activitiesHtml += "<button onclick='editActivity(" + i + ")'>Редактировать</button>";
+                    activitiesHtml += "<button onclick='deleteActivity(" + i + ")'>Удалить</button>";
+                    activitiesHtml += "</li>";
+                }
+
+                activitiesHtml += "</ul>";
+                document.getElementById("activitiesList").innerHTML = activitiesHtml;
+            } else {
+                document.getElementById("activitiesList").innerHTML = "Занятия не найдены.";
+            }
+        }
+
+        function editActivity(index) {
+    
+            var activitiesList = JSON.parse(localStorage.getItem("activities"));
+            var activityToEdit = activitiesList[index];
+
+          
+            window.location.href = "edit_activity.html?index=" + index;
+        }
+
+        function deleteActivity(index) {
+           
+            var activitiesList = JSON.parse(localStorage.getItem("activities"));
+            activitiesList.splice(index, 1);
+
+        
+            localStorage.setItem("activities", JSON.stringify(activitiesList));
+
+
+            loadActivities();
+        }
+    </script>
+</body>
+
+</html>

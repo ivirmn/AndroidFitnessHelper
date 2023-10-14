@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "35746643161",
+    "project_id": "ru-vsu-fitnesshelper",
+    "storage_bucket": "ru-vsu-fitnesshelper.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:35746643161:android:9a83afd2348d08538c12c8",
+        "android_client_info": {
+          "package_name": "ru.vsu.fitnesshelper"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPp1e8XcODcApt-OfOjJg1BKBGYHQR7l4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

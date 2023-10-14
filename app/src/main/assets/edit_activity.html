@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Редактировать занятие</title>
+    <style>
+        .day-button {
+            width: 12.5%;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+.alter-button {
+            width: 50%;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        .all-button {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px;
+            margin: 5px;
+            cursor: pointer;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Редактировать занятие</h1>
+
+    <label for="activityName">Название занятия:</label>
+    <input type="text" id="activityName"><br>
+
+    <label for="activityDuration">Длительность(мин):</label>
+    <input type="number" id="activityDuration"><br>
+
+    <label for="dayOfWeek">День недели:</label>
+    <select id="dayOfWeek">
+        <option value="Все">Каждый день</option>
+        <option value="Пн">Пн</option>
+        <option value="Вт">Вт</option>
+        <option value="Ср">Ср</option>
+        <option value="Чт">Чт</option>
+        <option value="Пт">Пт</option>
+        <option value="Сб">Сб</option>
+        <option value="Вс">Вс</option>
+    </select><br>
+
+    <button class="alter-button" onclick="saveEditedActivity()">Сохранить изменения</button>
+    <form action="activity_web_view.html">
+        <button class="alter-button" src="create_activity.html">Назад</button>
+    </form>
+
+    <script>
+        var editIndex = -1; // Индекс активности, которую мы редактируем
+
+        
+        var queryString = window.location.search;
+        var urlParams = new URLSearchParams(queryString);
+        if (urlParams.has("index")) {
+            editIndex = parseInt(urlParams.get("index"));
+        }
+
+        window.onload = function () {
+            if (editIndex !== -1) {
+             
+                loadActivityToEdit(editIndex);
+            }
+        };
+
+        function loadActivityToEdit(index) {
+            var activitiesList = JSON.parse(localStorage.getItem("activities")) || [];
+
+            if (index >= 0 && index < activitiesList.length) {
+                var activityToEdit = activitiesList[index];
+                document.getElementById("activityName").value = activityToEdit.name;
+                document.getElementById("activityDuration").value = activityToEdit.duration;
+                document.getElementById("dayOfWeek").value = activityToEdit.dayOfWeek;
+            }
+        }
+
+        function saveEditedActivity() {
+            var activityName = document.getElementById("activityName").value;
+            var duration = document.getElementById("activityDuration").value;
+            var dayOfWeek = document.getElementById("dayOfWeek").value;
+
+            var activity = {
+                name: activityName,
+                duration: duration,
+                dayOfWeek: dayOfWeek
+            };
+
+            var activitiesList = JSON.parse(localStorage.getItem("activities")) || [];
+
+            if (editIndex >= 0 && editIndex < activitiesList.length) {
+                
+                activitiesList[editIndex] = activity;
+            }
+
+            
+            localStorage.setItem("activities", JSON.stringify(activitiesList));
+
+          
+            window.location.href = "activity_web_view.html";
+        }
+    </script>
+</body>
+
+</html>

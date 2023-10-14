@@ -1,0 +1,37 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+    <EditText
+            android:id="@+id/editTextUserId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Введите ID пользователя"
+            android:layout_margin="16dp"/>
+
+    <Button
+            android:id="@+id/buttonSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/editTextUserId"
+            android:text="Искать"
+            android:layout_margin="16dp"/>
+
+    <TextView
+            android:id="@+id/textViewResult"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/buttonSearch"
+            android:layout_centerHorizontal="true"
+            android:text=""
+            android:layout_marginTop="16dp"/>
+
+    <Button
+            android:id="@+id/buttonBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textViewResult"
+            android:layout_centerHorizontal="true"
+            android:text="Назад"
+            android:layout_marginTop="16dp"/>
+</RelativeLayout>

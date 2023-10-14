@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical"
+              android:padding="16dp">
+
+    <!-- Выбор степени активности -->
+    <RadioGroup
+            android:id="@+id/radioGroupActivity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+        <RadioButton
+                android:id="@+id/radioButtonSedentary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Лежачий образ жизни (минимум физической активности)" />
+
+        <RadioButton
+                android:id="@+id/radioButtonLight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Легкая активность (легкие упражнения или ходьба)" />
+
+        <RadioButton
+                android:id="@+id/radioButtonModerate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Средняя активность (умеренные тренировки)" />
+
+        <RadioButton
+                android:id="@+id/radioButtonActive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Активная жизнь (активные тренировки)" />
+
+        <RadioButton
+                android:id="@+id/radioButtonVeryActive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Очень активный образ жизни (тяжелые тренировки)" />
+    </RadioGroup>
+
+    <!-- Кнопка для расчета калорий -->
+    <Button
+            android:id="@+id/buttonCalculateCalories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Рассчитать калории" />
+
+    <!-- Результат расчета калорий -->
+    <TextView
+            android:id="@+id/textViewCaloriesResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="18sp"
+            android:layout_marginTop="16dp" />
+
+    <!-- Кнопка "Назад" -->
+    <Button
+            android:id="@+id/buttonBackToMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Назад" />
+</LinearLayout>
